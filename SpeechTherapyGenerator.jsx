@@ -366,7 +366,7 @@ Generado con IA - ${new Date().toLocaleDateString()}
   };
 
   return (
-    <div className="max-w-7xl mx-auto p-6 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 min-h-screen relative">
+    <div className="min-h-screen bg-gray-50">
       {/* Error Alert */}
       {error && (
         <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 flex items-center gap-2">
@@ -378,123 +378,87 @@ Generado con IA - ${new Date().toLocaleDateString()}
         </div>
       )}
 
-      {/* Watermark */}
-      <div className="absolute bottom-4 right-4 text-xs text-gray-400 font-medium z-10">
-        <div className="flex items-center gap-1">
-          <span>Creado por</span>
-          <span className="font-bold text-indigo-600">Flgo. Cristóbal San Martín</span>
-          <a 
-            href="https://instagram.com/flgo_crissanmartin" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center gap-1 hover:text-indigo-600 transition-colors"
-          >
-            <Instagram className="w-4 h-4" />
-            @flgo_crissanmartin
-          </a>
-        </div>
-      </div>
-
-      <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100">
+      <div className="max-w-4xl mx-auto p-6">
         {/* Header */}
-        <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white p-8 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse"></div>
-          <div className="relative z-10">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="p-3 bg-white/20 rounded-full backdrop-blur-sm">
-                <Sparkles className="w-8 h-8" />
-              </div>
-              <div>
-                <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
-                  Generador IA de Actividades Fonoaudiológicas
-                </h1>
-                <p className="text-indigo-100 text-lg mt-1">Potenciado con Gemini AI para Fonoaudiólog@s</p>
-              </div>
+        <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg p-6 mb-6 text-white">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2 bg-white/20 rounded-lg">
+              <Sparkles className="w-6 h-6" />
             </div>
+            <div>
+              <h1 className="text-2xl font-bold">Generador IA de Actividades Fonoaudiológicas</h1>
+              <p className="text-purple-100 text-sm">Potenciado con Gemini AI para Fonoaudiólog@s</p>
+            </div>
+          </div>
+          
+          {/* API Key Section */}
+          <div className="mb-4">
+            <button
+              onClick={() => setShowApiKeyInput(!showApiKeyInput)}
+              className="flex items-center gap-2 bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all duration-200 text-sm"
+            >
+              <Key className="w-4 h-4" />
+              <span>{apiKey ? 'API Key Configurada' : 'Configurar API Key Gemini'}</span>
+              {showApiKeyInput ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            </button>
             
-            {/* API Key Section */}
-            <div className="mb-6">
-              <button
-                onClick={() => setShowApiKeyInput(!showApiKeyInput)}
-                className="flex items-center gap-2 bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition-all duration-200"
-              >
-                <Key className="w-5 h-5" />
-                <span className="text-sm font-medium">
-                  {apiKey ? 'API Key Configurada' : 'Configurar API Key Gemini'}
-                </span>
-                {showApiKeyInput ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-              </button>
-              
-              {showApiKeyInput && (
-                <div className="mt-3 p-4 bg-white/10 rounded-lg backdrop-blur-sm">
-                  <input
-                    type="password"
-                    placeholder="Ingresa tu API Key de Google Gemini"
-                    value={apiKey}
-                    onChange={(e) => setApiKey(e.target.value)}
-                    className="w-full p-3 rounded-lg bg-white/20 placeholder-indigo-200 text-white border border-white/30 focus:border-white focus:outline-none"
-                  />
-                  <p className="text-indigo-100 text-xs mt-2">
-                    Obtén tu API key gratuita en: https://aistudio.google.com/app/apikey
-                  </p>
-                </div>
-              )}
-            </div>
+            {showApiKeyInput && (
+              <div className="mt-3 p-3 bg-white/10 rounded-lg">
+                <input
+                  type="password"
+                  placeholder="Ingresa tu API Key de Google Gemini"
+                  value={apiKey}
+                  onChange={(e) => setApiKey(e.target.value)}
+                  className="w-full p-2 rounded-lg bg-white/20 placeholder-purple-200 text-white border border-white/30 focus:border-white focus:outline-none text-sm"
+                />
+                <p className="text-purple-100 text-xs mt-2">
+                  Obtén tu API key gratuita en: https://aistudio.google.com/app/apikey
+                </p>
+              </div>
+            )}
+          </div>
 
-            <div className="flex flex-wrap gap-4 p-4 bg-white/10 rounded-xl backdrop-blur-sm">
-              <div className="flex items-center gap-2">
-                <Target className="w-5 h-5" />
-                <span className="text-sm font-medium">Objetivos SMART</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <BookOpen className="w-5 h-5" />
-                <span className="text-sm font-medium">Taxonomía Bloom</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Users className="w-5 h-5" />
-                <span className="text-sm font-medium">Adaptación Pediátrica</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-5 h-5" />
-                <span className="text-sm font-medium">IA Gemini</span>
-              </div>
-            </div>
+          <div className="flex flex-wrap gap-3 text-sm">
+            <span className="bg-white/20 px-3 py-1 rounded-full">🎯 Objetivos SMART</span>
+            <span className="bg-white/20 px-3 py-1 rounded-full">📚 Taxonomía Bloom</span>
+            <span className="bg-white/20 px-3 py-1 rounded-full">👶 Adaptación Pediátrica</span>
+            <span className="bg-white/20 px-3 py-1 rounded-full">🤖 IA Gemini</span>
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 p-8">
+        <div className="grid lg:grid-cols-2 gap-6">
           {/* Form */}
-          <div className="space-y-8">
+          <div className="space-y-6">
             {/* User Information */}
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-100">
-              <h2 className="text-xl font-bold mb-5 flex items-center gap-3 text-gray-800">
-                <div className="p-2 bg-blue-600 text-white rounded-lg">
-                  <User className="w-5 h-5" />
-                </div>
-                Información del Usuario
-              </h2>
-              <div className="space-y-4">
+            <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+              <div className="bg-blue-50 px-4 py-3 border-b border-blue-100">
+                <h2 className="font-semibold text-gray-800 flex items-center gap-2">
+                  <User className="w-5 h-5 text-blue-600" />
+                  Información del Usuario
+                </h2>
+              </div>
+              <div className="p-4 space-y-4">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
                     Descripción del usuario (edad en meses y contexto clínico)
                   </label>
                   <textarea
                     value={formData.userDescription}
                     onChange={(e) => handleInputChange('userDescription', e.target.value)}
                     placeholder="Ej: Niño de 48 meses con retraso en el desarrollo del lenguaje expresivo, presenta dificultades en la articulación de fonemas fricativos"
-                    className="w-full p-4 border border-gray-300 rounded-xl focus:ring-4 focus:ring-blue-200 focus:border-blue-500 transition-all duration-200 resize-none"
-                    rows="4"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm resize-none"
+                    rows="3"
                   />
                 </div>
-                <div className="flex items-center gap-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-blue-300 transition-all duration-200">
+                <div className="flex items-center gap-2">
                   <input
                     type="checkbox"
                     id="pediatric"
                     checked={formData.isPediatric}
                     onChange={(e) => handleInputChange('isPediatric', e.target.checked)}
-                    className="w-5 h-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded cursor-pointer"
+                    className="w-4 h-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                   />
-                  <label htmlFor="pediatric" className="text-sm font-medium text-gray-800 cursor-pointer">
+                  <label htmlFor="pediatric" className="text-sm text-gray-700">
                     Sesión Pediátrica (lenguaje lúdico adaptado)
                   </label>
                 </div>
@@ -502,40 +466,28 @@ Generado con IA - ${new Date().toLocaleDateString()}
             </div>
 
             {/* Objectives and Session */}
-            <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 border border-green-100">
-              <h2 className="text-xl font-bold mb-5 flex items-center gap-3 text-gray-800">
-                <div className="p-2 bg-green-600 text-white rounded-lg">
-                  <Target className="w-5 h-5" />
-                </div>
-                Objetivo y Sesión
-              </h2>
-              <div className="space-y-4">
+            <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+              <div className="bg-green-50 px-4 py-3 border-b border-green-100">
+                <h2 className="font-semibold text-gray-800 flex items-center gap-2">
+                  <Target className="w-5 h-5 text-green-600" />
+                  Objetivo y Sesión
+                </h2>
+              </div>
+              <div className="p-4 space-y-4">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
                     Objetivo específico (basado en Taxonomía de Bloom)
                   </label>
                   <input
                     value={formData.specificObjective}
                     onChange={(e) => handleInputChange('specificObjective', e.target.value)}
                     placeholder="Ej: Mejorar la articulación del fonema /r/ en palabras bisílabas con un 80% de precisión"
-                    className="w-full p-4 border border-gray-300 rounded-xl focus:ring-4 focus:ring-green-200 focus:border-green-500 transition-all duration-200"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 text-sm"
                   />
-                  <div className="mt-3 p-3 bg-white rounded-lg border border-gray-200">
-                    <div className="flex flex-wrap gap-2">
-                      {bloomLevels.map((level, index) => (
-                        <span key={index} className={`px-3 py-1 rounded-full text-xs font-medium ${level.color}`}>
-                          {level.level}
-                        </span>
-                      ))}
-                    </div>
-                    <p className="text-xs text-gray-600 mt-2">
-                      <strong>Progresión:</strong> De Recordar a Crear - Desarrollo cognitivo estructurado
-                    </p>
-                  </div>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
                       Duración (minutos)
                     </label>
                     <input
@@ -545,17 +497,17 @@ Generado con IA - ${new Date().toLocaleDateString()}
                       placeholder="30"
                       min="15"
                       max="120"
-                      className="w-full p-4 border border-gray-300 rounded-xl focus:ring-4 focus:ring-green-200 focus:border-green-500 transition-all duration-200"
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 text-sm"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
                       Tipo de sesión
                     </label>
                     <select
                       value={formData.sessionType}
                       onChange={(e) => handleInputChange('sessionType', e.target.value)}
-                      className="w-full p-4 border border-gray-300 rounded-xl focus:ring-4 focus:ring-green-200 focus:border-green-500 transition-all duration-200 bg-white"
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 text-sm bg-white"
                     >
                       <option value="individual">Individual</option>
                       <option value="grupal">Grupal</option>
@@ -567,64 +519,59 @@ Generado con IA - ${new Date().toLocaleDateString()}
             </div>
 
             {/* Additional Context */}
-            <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 border border-purple-100">
+            <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
               <button
                 onClick={() => setShowAdvanced(!showAdvanced)}
-                className="flex items-center justify-between w-full text-xl font-bold text-gray-800 hover:text-purple-600 transition-colors mb-5"
+                className="w-full bg-purple-50 px-4 py-3 border-b border-purple-100 text-left hover:bg-purple-100 transition-colors"
               >
-                <span className="flex items-center gap-3">
-                  <div className="p-2 bg-purple-600 text-white rounded-lg">
-                    <Settings className="w-5 h-5" />
-                  </div>
-                  Contexto Adicional (Opcional)
-                </span>
-                {showAdvanced ? <ChevronUp className="w-6 h-6" /> : <ChevronDown className="w-6 h-6" />}
+                <div className="flex items-center justify-between">
+                  <h2 className="font-semibold text-gray-800 flex items-center gap-2">
+                    <Settings className="w-5 h-5 text-purple-600" />
+                    Contexto Adicional (Opcional)
+                  </h2>
+                  {showAdvanced ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                </div>
               </button>
               
               {showAdvanced && (
-                <div className="mt-4">
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-3">
-                      Contexto adicional detallado
-                    </label>
-                    <textarea
-                      value={formData.additionalContext.customContext}
-                      onChange={(e) => handleInputChange('additionalContext.customContext', e.target.value)}
-                      placeholder="Describe materiales específicos, estrategias terapéuticas, entorno de intervención, adaptaciones necesarias, intereses del paciente, etc."
-                      className="w-full p-4 border border-gray-300 rounded-xl focus:ring-4 focus:ring-purple-200 focus:border-purple-500 transition-all duration-200 text-sm resize-none"
-                      rows="6"
-                    />
-                  </div>
+                <div className="p-4">
+                  <textarea
+                    value={formData.additionalContext.customContext}
+                    onChange={(e) => handleInputChange('additionalContext.customContext', e.target.value)}
+                    placeholder="Describe materiales específicos, estrategias terapéuticas, entorno de intervención, adaptaciones necesarias, intereses del paciente, etc."
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-sm resize-none"
+                    rows="4"
+                  />
                 </div>
               )}
             </div>
 
             {/* File Upload */}
-            <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-6 border border-orange-100">
-              <h2 className="text-xl font-bold mb-5 flex items-center gap-3 text-gray-800">
-                <div className="p-2 bg-orange-600 text-white rounded-lg">
-                  <BookOpen className="w-5 h-5" />
-                </div>
-                Referencias Científicas (Opcional)
-              </h2>
-              <div className="space-y-4">
+            <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+              <div className="bg-orange-50 px-4 py-3 border-b border-orange-100">
+                <h2 className="font-semibold text-gray-800 flex items-center gap-2">
+                  <BookOpen className="w-5 h-5 text-orange-600" />
+                  Referencias Científicas (Opcional)
+                </h2>
+              </div>
+              <div className="p-4">
                 <div 
-                  className={`border-2 border-dashed border-orange-300 rounded-xl p-6 text-center hover:border-orange-400 transition-colors cursor-pointer ${processingFiles ? 'opacity-50' : ''}`}
+                  className={`border-2 border-dashed border-orange-300 rounded-lg p-4 text-center hover:border-orange-400 transition-colors cursor-pointer ${processingFiles ? 'opacity-50' : ''}`}
                   onClick={() => !processingFiles && fileInputRef.current?.click()}
                 >
                   {processingFiles ? (
-                    <div className="flex items-center justify-center gap-3">
-                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-600"></div>
-                      <span className="text-orange-600 font-medium">Procesando archivos PDF...</span>
+                    <div className="flex items-center justify-center gap-2">
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-orange-600"></div>
+                      <span className="text-orange-600 text-sm">Procesando archivos PDF...</span>
                     </div>
                   ) : (
                     <>
-                      <Upload className="w-10 h-10 text-orange-400 mx-auto mb-3" />
+                      <Upload className="w-8 h-8 text-orange-400 mx-auto mb-2" />
                       <span className="block text-sm font-medium text-gray-700 mb-1">
                         Subir archivos PDF (máx. 50MB cada uno)
                       </span>
                       <span className="text-xs text-gray-500">
-                        Los PDFs serán procesados automáticamente para extraer contenido científico
+                        Los PDFs serán procesados automáticamente
                       </span>
                     </>
                   )}
@@ -640,28 +587,18 @@ Generado con IA - ${new Date().toLocaleDateString()}
                 </div>
                 
                 {uploadedFiles.length > 0 && (
-                  <div className="space-y-3">
-                    <h4 className="text-sm font-semibold text-gray-700">Archivos procesados:</h4>
+                  <div className="mt-4 space-y-2">
                     {uploadedFiles.map((fileData, index) => (
-                      <div key={index} className="bg-white p-4 rounded-lg border border-gray-200 hover:border-orange-300 transition-colors">
-                        <div className="flex items-start justify-between gap-3">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-3 mb-2">
-                              <FileCheck className="w-5 h-5 text-green-600" />
-                              <span className="text-sm font-medium text-gray-800">{fileData.file.name}</span>
-                              <span className="text-xs text-gray-500">({(fileData.file.size / 1024 / 1024).toFixed(1)} MB)</span>
-                            </div>
-                            <div className="bg-gray-50 p-3 rounded-lg">
-                              <p className="text-xs text-gray-600 mb-1">Contenido extraído:</p>
-                              <p className="text-xs text-gray-700 line-clamp-3">
-                                {fileData.extractedText.substring(0, 200)}...
-                              </p>
-                            </div>
+                      <div key={index} className="bg-gray-50 p-3 rounded-lg border border-gray-200">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <FileCheck className="w-4 h-4 text-green-600" />
+                            <span className="text-sm font-medium text-gray-800">{fileData.file.name}</span>
+                            <span className="text-xs text-gray-500">({(fileData.file.size / 1024 / 1024).toFixed(1)} MB)</span>
                           </div>
                           <button
                             onClick={() => removeFile(index)}
-                            className="p-2 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-lg transition-all duration-200 flex-shrink-0"
-                            title="Eliminar archivo"
+                            className="p-1 text-red-500 hover:text-red-700 hover:bg-red-50 rounded"
                           >
                             <X className="w-4 h-4" />
                           </button>
@@ -677,16 +614,16 @@ Generado con IA - ${new Date().toLocaleDateString()}
             <button
               onClick={generateActivity}
               disabled={!formData.userDescription || !formData.specificObjective || !formData.duration || !apiKey || isGenerating}
-              className="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white py-5 px-8 rounded-xl font-bold text-lg hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg flex items-center justify-center gap-3"
+              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 px-6 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center gap-2"
             >
               {isGenerating ? (
                 <>
-                  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
                   <span>Generando con Gemini AI...</span>
                 </>
               ) : (
                 <>
-                  <Sparkles className="w-6 h-6" />
+                  <Sparkles className="w-5 h-5" />
                   <span>Generar Actividad con IA</span>
                 </>
               )}
@@ -694,230 +631,207 @@ Generado con IA - ${new Date().toLocaleDateString()}
           </div>
 
           {/* Results */}
-          <div className="lg:sticky lg:top-8">
+          <div className="lg:sticky lg:top-6">
             {generatedActivity ? (
-              <div className="bg-white border border-gray-200 rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300">
-                <div className="bg-gradient-to-r from-green-600 to-emerald-600 text-white p-6 flex justify-between items-start">
+              <div className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+                <div className="bg-gradient-to-r from-green-600 to-emerald-600 text-white p-4 flex justify-between items-start">
                   <div>
-                    <h2 className="text-2xl font-bold">{generatedActivity.title}</h2>
-                    <p className="text-green-100 text-sm mt-1 flex items-center gap-2">
+                    <h2 className="text-xl font-bold">{generatedActivity.title}</h2>
+                    <p className="text-green-100 text-sm mt-1 flex items-center gap-1">
                       <Sparkles className="w-4 h-4" />
                       Generado con Gemini AI
                     </p>
                   </div>
                   <button
                     onClick={exportActivity}
-                    className="bg-white/20 hover:bg-white/30 p-3 rounded-xl transition-all duration-200 flex items-center gap-2 group"
+                    className="bg-white/20 hover:bg-white/30 p-2 rounded-lg transition-all duration-200 flex items-center gap-1"
                     title="Exportar actividad"
                   >
-                    <Download className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
-                    <span className="text-sm font-medium">Exportar</span>
+                    <Download className="w-4 h-4" />
+                    <span className="text-sm">Exportar</span>
                   </button>
                 </div>
                 
-                <div className="p-8 max-h-[70vh] overflow-y-auto space-y-8">
-                  <div className="bg-blue-50 p-5 rounded-xl border-l-4 border-blue-500">
-                    <h3 className="font-bold text-lg text-gray-800 mb-3 flex items-center gap-2">
-                      <Target className="w-5 h-5 text-blue-600" />
+                <div className="p-4 max-h-[70vh] overflow-y-auto space-y-4">
+                  <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                    <h3 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                      <Target className="w-4 h-4 text-blue-600" />
                       Objetivo SMART:
                     </h3>
-                    <p className="text-gray-700 leading-relaxed">{generatedActivity.smartObjective}</p>
+                    <p className="text-gray-700 text-sm">{generatedActivity.smartObjective}</p>
                   </div>
 
-                  <div className="bg-gray-50 p-5 rounded-xl border-l-4 border-gray-400">
-                    <h3 className="font-bold text-lg text-gray-800 mb-3 flex items-center gap-2">
-                      <FileText className="w-5 h-5 text-gray-600" />
+                  <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-gray-400">
+                    <h3 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                      <FileText className="w-4 h-4 text-gray-600" />
                       Descripción:
                     </h3>
-                    <p className="text-gray-700 leading-relaxed">{generatedActivity.description}</p>
+                    <p className="text-gray-700 text-sm">{generatedActivity.description}</p>
                   </div>
 
-                  <div className="bg-yellow-50 p-5 rounded-xl border-l-4 border-yellow-500">
-                    <h3 className="font-bold text-lg text-gray-800 mb-3 flex items-center gap-2">
-                      <Users className="w-5 h-5 text-yellow-600" />
+                  <div className="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500">
+                    <h3 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                      <Users className="w-4 h-4 text-yellow-600" />
                       Materiales:
                     </h3>
-                    <ul className="space-y-2">
+                    <ul className="space-y-1">
                       {generatedActivity.materials.map((material, index) => (
-                        <li key={index} className="flex items-start gap-3">
-                          <span className="text-yellow-600 mt-1 flex-shrink-0">•</span>
-                          <span className="text-gray-700">{material}</span>
+                        <li key={index} className="flex items-start gap-2">
+                          <span className="text-yellow-600 mt-1 text-xs">•</span>
+                          <span className="text-gray-700 text-sm">{material}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="bg-green-50 p-5 rounded-xl border-l-4 border-green-500">
-                    <h3 className="font-bold text-lg text-gray-800 mb-3 flex items-center gap-2">
-                      <Clock className="w-5 h-5 text-green-600" />
+                  <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                    <h3 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                      <Clock className="w-4 h-4 text-green-600" />
                       Procedimiento:
                     </h3>
-                    <div className="space-y-4">
+                    <div className="space-y-3">
                       {generatedActivity.procedure.map((phase, index) => (
-                        <div key={index} className={`p-4 rounded-lg border-l-4 ${phase.color || 'bg-gray-100 border-gray-200 text-gray-800'}`}>
-                          <div className="font-bold text-gray-800 mb-2 flex justify-between items-center">
-                            <span>{phase.name}</span>
-                            <span className="bg-white/30 px-3 py-1 rounded-full text-sm font-medium">
+                        <div key={index} className="bg-white p-3 rounded-lg border border-green-200">
+                          <div className="font-semibold text-gray-800 mb-1 flex justify-between items-center">
+                            <span className="text-sm">{phase.name}</span>
+                            <span className="bg-green-100 px-2 py-1 rounded-full text-xs font-medium text-green-800">
                               {phase.time} min
                             </span>
                           </div>
-                          <p className="text-gray-700">{phase.description}</p>
+                          <p className="text-gray-700 text-sm">{phase.description}</p>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="bg-purple-50 p-5 rounded-xl border-l-4 border-purple-500">
-                    <h3 className="font-bold text-lg text-gray-800 mb-3 flex items-center gap-2">
-                      <Settings className="w-5 h-5 text-purple-600" />
+                  <div className="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-500">
+                    <h3 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                      <Settings className="w-4 h-4 text-purple-600" />
                       Evaluación:
                     </h3>
-                    <div className="space-y-3">
-                      <div className="bg-white p-3 rounded-lg border border-purple-200">
-                        <p className="text-sm font-medium text-gray-800 mb-1">Criterio:</p>
-                        <p className="text-gray-700">{generatedActivity.evaluation.criteria}</p>
+                    <div className="space-y-2">
+                      <div className="bg-white p-2 rounded border border-purple-200">
+                        <p className="text-xs font-medium text-gray-800 mb-1">Criterio:</p>
+                        <p className="text-gray-700 text-sm">{generatedActivity.evaluation.criteria}</p>
                       </div>
-                      <div className="bg-white p-3 rounded-lg border border-purple-200">
-                        <p className="text-sm font-medium text-gray-800 mb-2">Métodos:</p>
-                        <ul className="space-y-2">
+                      <div className="bg-white p-2 rounded border border-purple-200">
+                        <p className="text-xs font-medium text-gray-800 mb-1">Métodos:</p>
+                        <ul className="space-y-1">
                           {generatedActivity.evaluation.methods.map((method, index) => (
-                            <li key={index} className="flex items-start gap-3">
-                              <span className="text-purple-600 mt-1 flex-shrink-0">•</span>
-                              <span className="text-gray-700">{method}</span>
+                            <li key={index} className="flex items-start gap-2">
+                              <span className="text-purple-600 mt-1 text-xs">•</span>
+                              <span className="text-gray-700 text-sm">{method}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
-                      <div className="bg-white p-3 rounded-lg border border-purple-200">
-                        <p className="text-sm font-medium text-gray-800 mb-1">Retroalimentación:</p>
-                        <p className="text-gray-700">{generatedActivity.evaluation.feedback}</p>
+                      <div className="bg-white p-2 rounded border border-purple-200">
+                        <p className="text-xs font-medium text-gray-800 mb-1">Retroalimentación:</p>
+                        <p className="text-gray-700 text-sm">{generatedActivity.evaluation.feedback}</p>
                       </div>
                     </div>
                   </div>
 
-                  <div className="bg-pink-50 p-5 rounded-xl border-l-4 border-pink-500">
-                    <h3 className="font-bold text-lg text-gray-800 mb-3 flex items-center gap-2">
-                      <Sparkles className="w-5 h-5 text-pink-600" />
+                  <div className="bg-pink-50 p-4 rounded-lg border-l-4 border-pink-500">
+                    <h3 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                      <Sparkles className="w-4 h-4 text-pink-600" />
                       Adaptaciones:
                     </h3>
-                    <ul className="space-y-2">
+                    <ul className="space-y-1">
                       {generatedActivity.adaptations.map((adaptation, index) => (
-                        <li key={index} className="flex items-start gap-3">
-                          <span className="text-pink-600 mt-1 flex-shrink-0">•</span>
-                          <span className="text-gray-700">{adaptation}</span>
+                        <li key={index} className="flex items-start gap-2">
+                          <span className="text-pink-600 mt-1 text-xs">•</span>
+                          <span className="text-gray-700 text-sm">{adaptation}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="bg-indigo-50 p-5 rounded-xl border-l-4 border-indigo-500">
-                    <h3 className="font-bold text-lg text-gray-800 mb-3 flex items-center gap-2">
-                      <BookOpen className="w-5 h-5 text-indigo-600" />
+                  <div className="bg-indigo-50 p-4 rounded-lg border-l-4 border-indigo-500">
+                    <h3 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                      <BookOpen className="w-4 h-4 text-indigo-600" />
                       Fundamentación Teórica:
                     </h3>
-                    <ul className="space-y-2">
+                    <ul className="space-y-1">
                       {generatedActivity.theoreticalFoundation.map((foundation, index) => (
-                        <li key={index} className="flex items-start gap-3">
-                          <span className="text-indigo-600 mt-1 flex-shrink-0">•</span>
-                          <span className="text-gray-700">{foundation}</span>
+                        <li key={index} className="flex items-start gap-2">
+                          <span className="text-indigo-600 mt-1 text-xs">•</span>
+                          <span className="text-gray-700 text-sm">{foundation}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
-
-                  {formData.references.length > 0 && (
-                    <div className="bg-gray-50 p-5 rounded-xl border-l-4 border-gray-400">
-                      <h3 className="font-bold text-lg text-gray-800 mb-3 flex items-center gap-2">
-                        <FileText className="w-5 h-5 text-gray-600" />
-                        Referencias Procesadas:
-                      </h3>
-                      <div className="bg-white p-4 rounded-lg border border-gray-200">
-                        <ul className="space-y-2">
-                          {formData.references.map((fileData, index) => (
-                            <li key={index} className="flex items-center gap-3 p-2 bg-gray-50 rounded">
-                              <FileText className="w-5 h-5 text-gray-500" />
-                              <span className="text-gray-700 font-medium">{fileData.file.name}</span>
-                              <span className="text-xs text-green-600 bg-green-100 px-2 py-1 rounded">Procesado</span>
-                            </li>
-                          ))}
-                        </ul>
-                        <p className="text-xs text-gray-500 mt-3 italic">
-                          * Las referencias fueron procesadas y su contenido incorporado en la fundamentación teórica.
-                        </p>
-                      </div>
-                    </div>
-                  )}
                 </div>
               </div>
             ) : (
-              <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 transition-colors">
-                <div className="mb-6">
-                  <div className="inline-block p-4 bg-white rounded-full shadow-lg">
-                    <Sparkles className="w-12 h-12 text-gray-400" />
+              <div className="bg-white rounded-lg border border-gray-200 p-8 text-center">
+                <div className="mb-4">
+                  <div className="inline-block p-3 bg-gray-100 rounded-full">
+                    <Sparkles className="w-8 h-8 text-gray-400" />
                   </div>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-700 mb-3">
+                <h3 className="text-lg font-semibold text-gray-700 mb-2">
                   Actividad Lista para Generar
                 </h3>
-                <p className="text-gray-600 text-lg max-w-md mx-auto mb-8">
-                  Configura tu API key de Gemini, completa los campos requeridos y haz clic en "Generar Actividad" para crear una actividad fonoaudiológica personalizada con IA.
+                <p className="text-gray-600 text-sm mb-6">
+                  Configura tu API key de Gemini, completa los campos requeridos y haz clic en "Generar Actividad".
                 </p>
                 
-                <div className="space-y-6">
-                  <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
-                    <h4 className="font-bold text-lg text-gray-800 mb-4 flex items-center gap-2">
-                      <BookOpen className="w-5 h-5 text-orange-600" />
+                <div className="space-y-4">
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                      <BookOpen className="w-4 h-4 text-orange-600" />
                       Taxonomía de Bloom - Niveles Cognitivos:
                     </h4>
-                    <div className="grid grid-cols-1 gap-3">
+                    <div className="grid grid-cols-1 gap-2">
                       {bloomLevels.map((level, index) => (
-                        <div key={index} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                          <span className="font-bold text-lg text-blue-600">{level.level}:</span>
-                          <span className="text-gray-700 text-right max-w-xs">{level.description}</span>
+                        <div key={index} className="flex justify-between items-center p-2 bg-white rounded border">
+                          <span className="font-medium text-sm text-blue-600">{level.level}:</span>
+                          <span className="text-gray-700 text-xs text-right">{level.description}</span>
                         </div>
                       ))}
                     </div>
                   </div>
                   
-                  <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
-                    <h4 className="font-bold text-lg text-gray-800 mb-4 flex items-center gap-2">
-                      <Target className="w-5 h-5 text-green-600" />
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                      <Target className="w-4 h-4 text-green-600" />
                       Metodología SMART:
                     </h4>
-                    <div className="text-left space-y-2">
-                      <div className="flex items-start gap-3 p-3 bg-green-50 rounded-lg">
-                        <span className="bg-green-600 text-white px-2 py-1 rounded font-bold text-sm">S</span>
+                    <div className="space-y-2">
+                      <div className="flex items-start gap-2 p-2 bg-green-50 rounded">
+                        <span className="bg-green-600 text-white px-2 py-1 rounded text-xs font-bold">S</span>
                         <div>
-                          <strong className="text-gray-800">Específico</strong>
-                          <p className="text-gray-600 text-sm">Objetivo claro y bien definido</p>
+                          <strong className="text-gray-800 text-sm">Específico</strong>
+                          <p className="text-gray-600 text-xs">Objetivo claro y bien definido</p>
                         </div>
                       </div>
-                      <div className="flex items-start gap-3 p-3 bg-blue-50 rounded-lg">
-                        <span className="bg-blue-600 text-white px-2 py-1 rounded font-bold text-sm">M</span>
+                      <div className="flex items-start gap-2 p-2 bg-blue-50 rounded">
+                        <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-bold">M</span>
                         <div>
-                          <strong className="text-gray-800">Medible</strong>
-                          <p className="text-gray-600 text-sm">Criterios cuantificables</p>
+                          <strong className="text-gray-800 text-sm">Medible</strong>
+                          <p className="text-gray-600 text-xs">Criterios cuantificables</p>
                         </div>
                       </div>
-                      <div className="flex items-start gap-3 p-3 bg-yellow-50 rounded-lg">
-                        <span className="bg-yellow-600 text-white px-2 py-1 rounded font-bold text-sm">A</span>
+                      <div className="flex items-start gap-2 p-2 bg-yellow-50 rounded">
+                        <span className="bg-yellow-600 text-white px-2 py-1 rounded text-xs font-bold">A</span>
                         <div>
-                          <strong className="text-gray-800">Alcanzable</strong>
-                          <p className="text-gray-600 text-sm">Realista según capacidades</p>
+                          <strong className="text-gray-800 text-sm">Alcanzable</strong>
+                          <p className="text-gray-600 text-xs">Realista según capacidades</p>
                         </div>
                       </div>
-                      <div className="flex items-start gap-3 p-3 bg-purple-50 rounded-lg">
-                        <span className="bg-purple-600 text-white px-2 py-1 rounded font-bold text-sm">R</span>
+                      <div className="flex items-start gap-2 p-2 bg-purple-50 rounded">
+                        <span className="bg-purple-600 text-white px-2 py-1 rounded text-xs font-bold">R</span>
                         <div>
-                          <strong className="text-gray-800">Relevante</strong>
-                          <p className="text-gray-600 text-sm">Pertinente al caso clínico</p>
+                          <strong className="text-gray-800 text-sm">Relevante</strong>
+                          <p className="text-gray-600 text-xs">Pertinente al caso clínico</p>
                         </div>
                       </div>
-                      <div className="flex items-start gap-3 p-3 bg-red-50 rounded-lg">
-                        <span className="bg-red-600 text-white px-2 py-1 rounded font-bold text-sm">T</span>
+                      <div className="flex items-start gap-2 p-2 bg-red-50 rounded">
+                        <span className="bg-red-600 text-white px-2 py-1 rounded text-xs font-bold">T</span>
                         <div>
-                          <strong className="text-gray-800">Temporal</strong>
-                          <p className="text-gray-600 text-sm">Con plazos definidos</p>
+                          <strong className="text-gray-800 text-sm">Temporal</strong>
+                          <p className="text-gray-600 text-xs">Con plazos definidos</p>
                         </div>
                       </div>
                     </div>
@@ -929,30 +843,19 @@ Generado con IA - ${new Date().toLocaleDateString()}
         </div>
 
         {/* Footer */}
-        <div className="bg-gradient-to-r from-gray-50 to-gray-100 border-t border-gray-200 p-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="flex items-center gap-3">
-              <Sparkles className="w-5 h-5 text-indigo-600" />
-              <span className="font-semibold text-gray-700">Generador IA de Actividades Fonoaudiológicas</span>
-            </div>
-            <div className="flex flex-wrap gap-6 text-sm text-gray-600">
-              <div className="flex items-center gap-2">
-                <Target className="w-4 h-4 text-green-600" />
-                <span>Objetivos SMART</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <BookOpen className="w-4 h-4 text-orange-600" />
-                <span>Taxonomía Bloom</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Users className="w-4 h-4 text-purple-600" />
-                <span>Adaptación Pediátrica</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-pink-600" />
-                <span>Gemini AI</span>
-              </div>
-            </div>
+        <div className="mt-8 text-center">
+          <div className="flex items-center justify-center gap-2 text-sm text-gray-500">
+            <span>Creado por</span>
+            <span className="font-semibold text-purple-600">Flgo. Cristóbal San Martín</span>
+            <a 
+              href="https://instagram.com/flgo_crissanmartin" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 hover:text-purple-600 transition-colors"
+            >
+              <Instagram className="w-4 h-4" />
+              @flgo_crissanmartin
+            </a>
           </div>
         </div>
       </div>
